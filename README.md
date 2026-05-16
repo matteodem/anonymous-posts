@@ -8,4 +8,8 @@ This is a side project where I can use my knowledge of Angular and Spring Boot f
 
 ```sh
 cd api && ./gradlew bootRun
+# Open another terminal
+cd ui && npm start
 ```
+
+Open http://localhost:4200/
