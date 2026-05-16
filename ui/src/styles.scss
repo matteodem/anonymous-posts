@@ -5,6 +5,7 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 @use 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 html {
   height: 100%;
