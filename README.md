@@ -4,6 +4,12 @@ A small web app where users can create anonymous Markdown posts and share them v
 
 This is a side project where I can use my knowledge of Angular and Spring Boot for a real app.
 
+## How To Install
+
+```sh
+cd ui && npm install
+```
+
 ## How To Run
 
 ```sh
