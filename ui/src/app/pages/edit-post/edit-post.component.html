@@ -1,0 +1,82 @@
+<div *ngIf="isLoading" class="text-gray-600">
+  Loading editor...
+</div>
+
+<div *ngIf="!isLoading && errorMessage && !token" class="rounded-2xl bg-white p-6 shadow-sm">
+  <h1 class="text-2xl font-bold">Cannot edit post</h1>
+  <p class="mt-2 text-gray-600">{{ errorMessage }}</p>
+
+  <a
+    [routerLink]="['/p', slug]"
+    class="mt-4 inline-block rounded-xl bg-gray-900 px-5 py-3 text-white hover:bg-gray-700"
+  >
+    Back to post
+  </a>
+</div>
+
+<section *ngIf="!isLoading && token" class="rounded-2xl bg-white p-6 shadow-sm">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Edit post</h1>
+    <p class="mt-2 text-gray-600">
+      Slug is locked for now:
+      <span class="font-mono text-gray-900">/p/{{ slug }}</span>
+    </p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+    <div>
+      <label class="mb-1 block text-sm font-medium">Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        class="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-gray-900"
+      />
+
+      <p
+        *ngIf="form.controls['title'].touched && form.controls['title'].invalid"
+        class="mt-1 text-sm text-red-600"
+      >
+        Title is required.
+      </p>
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-medium">Content Markdown</label>
+      <textarea
+        formControlName="content"
+        rows="12"
+        class="w-full resize-y rounded-xl border border-gray-300 px-4 py-3 font-mono text-sm outline-none focus:border-gray-900"
+      ></textarea>
+
+      <p
+        *ngIf="form.controls['content'].touched && form.controls['content'].invalid"
+        class="mt-1 text-sm text-red-600"
+      >
+        Content is required.
+      </p>
+    </div>
+
+    <p *ngIf="errorMessage" class="text-sm text-red-600">
+      {{ errorMessage }}
+    </p>
+
+    <div class="flex items-center gap-3">
+      <button
+        type="submit"
+        [disabled]="isSubmitting"
+        class="rounded-xl bg-gray-900 px-5 py-3 font-medium text-white hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {{ isSubmitting ? 'Saving...' : 'Save' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="deletePost()"
+        [disabled]="isDeleting"
+        class="rounded-xl bg-red-600 px-5 py-3 font-medium text-white hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {{ isDeleting ? 'Deleting...' : 'Remove' }}
+      </button>
+    </div>
+  </form>
+</section>

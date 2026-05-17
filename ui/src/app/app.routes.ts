@@ -1,22 +1,23 @@
 import { Routes } from '@angular/router';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { ViewPostComponent } from './pages/view-post/view-post.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/home/home')
-        .then(m => m.Home)
+    component: CreatePostComponent,
   },
   {
-    path: 'post/:slug',
-    loadComponent: () =>
-      import('./pages/post-view/post-view')
-        .then(m => m.PostView)
+    path: 'p/:slug',
+    component: ViewPostComponent,
   },
   {
-    path: 'post/:slug/edit',
-    loadComponent: () =>
-      import('./pages/post-edit/post-edit')
-        .then(m => m.PostEdit)
-  }
+    path: 'p/:slug/edit',
+    component: EditPostComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

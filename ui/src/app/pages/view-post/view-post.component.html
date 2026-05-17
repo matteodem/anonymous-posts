@@ -1,0 +1,53 @@
+<div *ngIf="isLoading" class="text-gray-600">
+  Loading post...
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="rounded-2xl bg-white p-6 shadow-sm">
+  <h1 class="text-2xl font-bold">Something went wrong</h1>
+  <p class="mt-2 text-gray-600">{{ errorMessage }}</p>
+
+  <a
+    routerLink="/"
+    class="mt-4 inline-block rounded-xl bg-gray-900 px-5 py-3 text-white hover:bg-gray-700"
+  >
+    Create new post
+  </a>
+</div>
+
+<article *ngIf="!isLoading && post" class="rounded-2xl bg-white p-6 shadow-sm">
+  <div class="mb-6 flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-bold">{{ post.title }}</h1>
+      <p class="mt-2 text-sm text-gray-500">
+        /p/{{ post.slug }}
+      </p>
+    </div>
+
+    <a
+      *ngIf="canEdit"
+      [routerLink]="['/p', post.slug, 'edit']"
+      class="rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div class="prose max-w-none" [innerHTML]="htmlContent"></div>
+
+  <div class="mt-8 flex gap-3 border-t pt-6">
+    <button
+      type="button"
+      (click)="copyLink()"
+      class="rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-100"
+    >
+      Copy link
+    </button>
+
+    <a
+      routerLink="/"
+      class="rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-100"
+    >
+      Create another post
+    </a>
+  </div>
+</article>
